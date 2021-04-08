@@ -58,8 +58,8 @@ all: main-build
 main-build: uart_lab1.elf secondary-outputs
 
 # Tool invocations
-uart_lab1.elf: $(OBJS) $(USER_OBJS) C:\Users\ASUS\Desktop\UART_lab1\uart_lab1\STM32F407VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "uart_lab1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ASUS\Desktop\UART_lab1\uart_lab1\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_lab1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+uart_lab1.elf: $(OBJS) $(USER_OBJS) C:\Users\ASUS\Desktop\skmwmsw\SKMwMSW\uart_lab1\STM32F407VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "uart_lab1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ASUS\Desktop\skmwmsw\SKMwMSW\uart_lab1\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_lab1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
