@@ -61,7 +61,7 @@ uint8_t data[100];// Tablica przechowujaca wysylana wiadomosc.
 uint16_t size = 0; // Rozmiar wysylanej wiadomosci ++cnt; // Zwiekszenie licznika wyslanych wiadomosci.
 
 //RX:
-uint8_t Received;
+uint8_t Received[1];
 
 
 
@@ -154,7 +154,7 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 	  {
 			 ++cnt; // Zwiekszenie licznika wyslanych wiadomosci.
 			 size = sprintf(data, "Liczba wyslanych wiadomosci: %d.\n\r", cnt); // Stworzenie wiadomosci do wyslania oraz przypisanie ilosci wysylanych znakow do zmiennej size.
-			 HAL_UART_Transmit_IT(&huart2, data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
+			 //HAL_UART_Transmit_IT(&huart2, data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
 			 HAL_GPIO_TogglePin(LED_Green_GPIO_Port, LED_Green_Pin); // Zmiana stanu pinu na diodzie LED
 			 timer_state=0;
 	  }
@@ -166,28 +166,17 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 
 			// Odebrany znak zostaje przekonwertowany na liczbe calkowita i sprawdzony
 			// instrukcja warunkowa
-			switch (atoi(&Received)) {
 
-			case 0: // Jezeli odebrany zostanie znak 0
-				size = sprintf(Data, "STOP\n\r");
-				HAL_GPIO_WritePin(LED_Red_GPIO_Port, LED_Red_Pin, GPIO_PIN_RESET);
-				break;
 
-			case 1: // Jezeli odebrany zostanie znak 1
-				size = sprintf(Data, "START\n\r");
-				HAL_GPIO_WritePin(LED_Red_GPIO_Port, LED_Red_Pin, GPIO_PIN_SET);
-				break;
+			size = sprintf(Data, "%s",Received);
 
-			default: // Jezeli odebrano nieobslugiwany znak
-				size = sprintf(Data, "Odebrano nieznany znak: %c\n\r", Received);
-				break;
-			}
 
 			HAL_UART_Transmit_IT(&huart2, Data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
 			HAL_UART_Receive_IT(&huart2, &Received, 1); // Ponowne włączenie nasłuchiwania
 			receive_flag=0;
 
 	  }
+
 
 
 
