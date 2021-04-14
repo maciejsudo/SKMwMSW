@@ -61,8 +61,10 @@ uint8_t data[100];// Tablica przechowujaca wysylana wiadomosc.
 uint16_t size = 0; // Rozmiar wysylanej wiadomosci ++cnt; // Zwiekszenie licznika wyslanych wiadomosci.
 
 //RX:
-uint8_t Received[1];
+uint8_t Received[10];
+uint8_t receive_data[50];
 
+uint8_t data_buffer[10];
 
 
 /* USER CODE END PV */
@@ -153,7 +155,7 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 	  if(timer_state==1)
 	  {
 			 ++cnt; // Zwiekszenie licznika wyslanych wiadomosci.
-			 size = sprintf(data, "Liczba wyslanych wiadomosci: %d.\n\r", cnt); // Stworzenie wiadomosci do wyslania oraz przypisanie ilosci wysylanych znakow do zmiennej size.
+			 size = sprintf(data, "									message nr: %d.\n\r", cnt); // Stworzenie wiadomosci do wyslania oraz przypisanie ilosci wysylanych znakow do zmiennej size.
 			 //HAL_UART_Transmit_IT(&huart2, data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
 			 HAL_GPIO_TogglePin(LED_Green_GPIO_Port, LED_Green_Pin); // Zmiana stanu pinu na diodzie LED
 			 timer_state=0;
@@ -161,18 +163,66 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 
 	  if(receive_flag==1)
 	  {
-			uint8_t Data[50]; // Tablica przechowujaca wysylana wiadomosc.
-			uint16_t size = 0; // Rozmiar wysylanej wiadomosci
 
-			// Odebrany znak zostaje przekonwertowany na liczbe calkowita i sprawdzony
-			// instrukcja warunkowa
+		    static uint8_t i=0;
+		  	uint16_t size = 0; // Rozmiar wysylanej wiadomosci
 
 
-			size = sprintf(Data, "%s",Received);
+
+			//size = sprintf(receive_data, "%s",Received);
+			if (Received[0] == 13 || Received[0]== 10)
+			{
+			size = sprintf(receive_data, "\n\r");
+			i=0;
+
+			//RLON/RLOFF
+			//HELP
+				if(data_buffer[0]=='h' && data_buffer[1]=='e' && data_buffer[2]=='l' && data_buffer[3]=='p')
+				{
+					size = sprintf(data,"\r\nrlon - turns red led on\r\nrloff turns led red off\r\n");
+					HAL_UART_Transmit_IT(&huart2, data, size);
+				}
+
+				else if(data_buffer[0]=='r' && data_buffer[1]=='l' && data_buffer[2]=='o' && data_buffer[3]=='n')
+				{
+					HAL_GPIO_WritePin(LED_Red_GPIO_Port, LED_Red_Pin, SET);
+					size = sprintf(data,"\r\nred led turned ON\r\n");
+					HAL_UART_Transmit_IT(&huart2, data, size);
+				}
+
+				else if(data_buffer[0]=='r' && data_buffer[1]=='l' && data_buffer[2]=='o' && data_buffer[3]=='f' && data_buffer[4]=='f')
+				{
+					HAL_GPIO_WritePin(LED_Red_GPIO_Port, LED_Red_Pin, RESET);
+					size = sprintf(data,"\r\nred led turned OFF\r\n");
+					HAL_UART_Transmit_IT(&huart2, data, size);
+				}
+
+			}
 
 
-			HAL_UART_Transmit_IT(&huart2, Data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
+
+
+
+
+			else
+			{
+			size = sprintf(receive_data, "%s",Received);
+
+			data_buffer[i]=receive_data[0];
+			i++;
+			if(i==10)
+			{
+			i=0;
+			}
+
+
+			}
+
+			HAL_UART_Transmit_IT(&huart2, receive_data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
 			HAL_UART_Receive_IT(&huart2, &Received, 1); // Ponowne włączenie nasłuchiwania
+
+
+
 			receive_flag=0;
 
 	  }
@@ -440,7 +490,8 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, LED_Green_Pin|LD3_Pin|LED_Red_Pin|Audio_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, LED_Green_Pin|LED_Orange_Pin|LED_Red_Pin|LED_Blue_Pin
+                          |Audio_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : CS_I2C_SPI_Pin */
   GPIO_InitStruct.Pin = CS_I2C_SPI_Pin;
@@ -484,8 +535,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
   HAL_GPIO_Init(CLK_IN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LED_Green_Pin LD3_Pin LED_Red_Pin Audio_RST_Pin */
-  GPIO_InitStruct.Pin = LED_Green_Pin|LD3_Pin|LED_Red_Pin|Audio_RST_Pin;
+  /*Configure GPIO pins : LED_Green_Pin LED_Orange_Pin LED_Red_Pin LED_Blue_Pin
+                           Audio_RST_Pin */
+  GPIO_InitStruct.Pin = LED_Green_Pin|LED_Orange_Pin|LED_Red_Pin|LED_Blue_Pin
+                          |Audio_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
