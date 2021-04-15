@@ -1,4 +1,4 @@
-11:37:02 **** Incremental Build of configuration Debug for project uart_lab1 ****
+10:10:05 **** Incremental Build of configuration Debug for project uart_lab1 ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../USB_HOST/App -I../USB_HOST/Target -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
@@ -27,7 +27,7 @@ c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externalt
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
 ../Core/Src/main.c:182:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
-      size = sprintf(data,"\r\nrlon - turns red led on\r\nrloff turns led red off\r\n");
+      size = sprintf(data,"\r\nrlon - turns red led on\r\nrloff turns led red off\r\n\r\nblon - turns blue led on\r\nbloff turns blue led off\r\n\r\nolon - turns orange led on\r\noloff turns orange led off\r\n");
                      ^~~~
 In file included from ../Core/Src/main.c:26:0:
 c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
@@ -47,14 +47,49 @@ In file included from ../Core/Src/main.c:26:0:
 c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../Core/Src/main.c:209:19: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../Core/Src/main.c:203:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+      size = sprintf(data,"\r\norange led turned ON\r\n");
+                     ^~~~
+In file included from ../Core/Src/main.c:26:0:
+c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:210:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+      size = sprintf(data,"\r\norange led turned OFF\r\n");
+                     ^~~~
+In file included from ../Core/Src/main.c:26:0:
+c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:218:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+      size = sprintf(data,"\r\nblue led turned ON\r\n");
+                     ^~~~
+In file included from ../Core/Src/main.c:26:0:
+c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:225:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+      size = sprintf(data,"\r\nblue led turned OFF\r\n");
+                     ^~~~
+In file included from ../Core/Src/main.c:26:0:
+c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:230:21: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+      size = sprintf(data,"\r\nWRONG COMMAND!!\r\n");
+                     ^~~~
+In file included from ../Core/Src/main.c:26:0:
+c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
+ int sprintf (char *__restrict, const char *__restrict, ...)
+     ^~~~~~~
+../Core/Src/main.c:245:19: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
     size = sprintf(receive_data, "%s",Received);
                    ^~~~~~~~~~~~
 In file included from ../Core/Src/main.c:26:0:
 c:\st\stm32cubeide_1.5.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924\tools\arm-none-eabi\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'uint8_t * {aka unsigned char *}'
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../Core/Src/main.c:222:33: warning: passing argument 2 of 'HAL_UART_Receive_IT' from incompatible pointer type [-Wincompatible-pointer-types]
+../Core/Src/main.c:258:33: warning: passing argument 2 of 'HAL_UART_Receive_IT' from incompatible pointer type [-Wincompatible-pointer-types]
     HAL_UART_Receive_IT(&huart2, &Received, 1); // Ponowne włączenie nasłuchiwania
                                  ^
 In file included from ../Core/Inc/stm32f4xx_hal_conf.h:404:0,
@@ -64,6 +99,9 @@ In file included from ../Core/Inc/stm32f4xx_hal_conf.h:404:0,
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:699:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'uint8_t (*)[10] {aka unsigned char (*)[10]}'
  HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
                    ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:182:13: warning: '__builtin_memcpy' writing 165 bytes into a region of size 100 overflows the destination [-Wstringop-overflow=]
+      size = sprintf(data,"\r\nrlon - turns red led on\r\nrloff turns led red off\r\n\r\nblon - turns blue led on\r\nbloff turns blue led off\r\n\r\nolon - turns orange led on\r\noloff turns orange led off\r\n");
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "uart_lab1.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ASUS\Desktop\skmwmsw\SKMwMSW\uart_lab1\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uart_lab1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: uart_lab1.elf
  
@@ -71,17 +109,24 @@ arm-none-eabi-objdump -h -S  uart_lab1.elf  > "uart_lab1.list"
 arm-none-eabi-objcopy  -O binary  uart_lab1.elf  "uart_lab1.bin"
 arm-none-eabi-size   uart_lab1.elf 
    text	   data	    bss	    dec	    hex	filename
-  38956	    152	   3840	  42948	   a7c4	uart_lab1.elf
+  39628	    152	   3840	  43620	   aa64	uart_lab1.elf
 Finished building: default.size.stdout
- 
 Finished building: uart_lab1.bin
+ 
  
 Finished building: uart_lab1.list
  
-11:37:08 **** Incremental Build of configuration Debug for project uart_lab1 ****
+10:10:11 **** Incremental Build of configuration Debug for project uart_lab1 ****
 make -j4 all 
 arm-none-eabi-size   uart_lab1.elf 
    text	   data	    bss	    dec	    hex	filename
-  38956	    152	   3840	  42948	   a7c4	uart_lab1.elf
+  39628	    152	   3840	  43620	   aa64	uart_lab1.elf
+Finished building: default.size.stdout
+ 
+10:11:28 **** Incremental Build of configuration Debug for project uart_lab1 ****
+make -j4 all 
+arm-none-eabi-size   uart_lab1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  39628	    152	   3840	  43620	   aa64	uart_lab1.elf
 Finished building: default.size.stdout
  
