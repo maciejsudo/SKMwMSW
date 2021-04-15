@@ -179,7 +179,7 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 			//HELP
 				if(data_buffer[0]=='h' && data_buffer[1]=='e' && data_buffer[2]=='l' && data_buffer[3]=='p')
 				{
-					size = sprintf(data,"\r\nrlon - turns red led on\r\nrloff turns led red off\r\n\r\nblon - turns blue led on\r\nbloff turns blue led off\r\n\r\nolon - turns orange led on\r\noloff turns orange led off\r\n");
+					size = sprintf(data,"\r\n rlon - turns red led on\r\n rloff - turns led red off\r\n blon - turns blue led on\r\n bloff - turns blue led off\r\n olon - turns orange led on\r\n oloff - turns orange led off\r\n");
 					HAL_UART_Transmit_IT(&huart2, data, size);
 				}
 
@@ -225,12 +225,8 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 					size = sprintf(data,"\r\nblue led turned OFF\r\n");
 					HAL_UART_Transmit_IT(&huart2, data, size);
 				}
-				else
-				{
-					size = sprintf(data,"\r\nWRONG COMMAND!!\r\n");
-					HAL_UART_Transmit_IT(&huart2, data, size);
 
-				}
+
 
 
 			}
