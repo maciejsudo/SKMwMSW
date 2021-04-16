@@ -1,10 +1,10 @@
-12:01:34 **** Incremental Build of configuration Debug for project uart_lab1 ****
+14:23:52 **** Incremental Build of configuration Debug for project uart_lab1 ****
 make -j4 all 
 arm-none-eabi-size   uart_lab1.elf 
    text	   data	    bss	    dec	    hex	filename
-  39576	    152	   3840	  43568	   aa30	uart_lab1.elf
+  39636	    152	   3840	  43628	   aa6c	uart_lab1.elf
 Finished building: default.size.stdout
  
 
-12:01:35 Build Finished. 0 errors, 0 warnings. (took 444ms)
+14:23:53 Build Finished. 0 errors, 0 warnings. (took 410ms)
 

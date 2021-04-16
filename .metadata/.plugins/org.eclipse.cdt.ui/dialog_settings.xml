@@ -12,4 +12,8 @@
 			<item value="weak*callback"/>
 		</list>
 	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item key="size.width" value="568"/>
+		<item key="size.height" value="180"/>
+	</section>
 </section>

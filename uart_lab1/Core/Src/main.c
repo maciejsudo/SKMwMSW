@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,6 +66,7 @@ uint8_t Received[10];
 uint8_t receive_data[50];
 
 uint8_t data_buffer[10];
+bool monitor_flag = false;
 
 
 /* USER CODE END PV */
@@ -155,8 +157,12 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 	  if(timer_state==1)
 	  {
 			 ++cnt; // Zwiekszenie licznika wyslanych wiadomosci.
-			 size = sprintf(data, "									message nr: %d.\n\r", cnt); // Stworzenie wiadomosci do wyslania oraz przypisanie ilosci wysylanych znakow do zmiennej size.
-			 //HAL_UART_Transmit_IT(&huart2, data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
+			 size = sprintf(data, "						message nr: %d.\n\r", cnt); // Stworzenie wiadomosci do wyslania oraz przypisanie ilosci wysylanych znakow do zmiennej size.
+			 if(monitor_flag==true)
+			 {
+			 HAL_UART_Transmit_IT(&huart2, data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
+			 }
+
 			 HAL_GPIO_TogglePin(LED_Green_GPIO_Port, LED_Green_Pin); // Zmiana stanu pinu na diodzie LED
 			 timer_state=0;
 	  }
@@ -225,7 +231,17 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 					size = sprintf(data,"\r\nblue led turned OFF\r\n");
 					HAL_UART_Transmit_IT(&huart2, data, size);
 				}
+				else if(data_buffer[0]=='s')
+				{
+					monitor_flag = true;
 
+				}
+
+				else if(data_buffer[0]=='e')
+				{
+					monitor_flag = false;
+
+				}
 
 
 
