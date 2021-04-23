@@ -174,15 +174,12 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 		  	uint16_t size = 0; // Rozmiar wysylanej wiadomosci
 
 
-
 			//size = sprintf(receive_data, "%s",Received);
 			if (Received[0] == 13 || Received[0]== 10)
 			{
 			size = sprintf(receive_data, "\n\r>>");
 			i=0;
 
-			//RLON/RLOFF
-			//HELP
 				if(data_buffer[0]=='h' && data_buffer[1]=='e' && data_buffer[2]=='l' && data_buffer[3]=='p')
 				{
 					size = sprintf(data,"\r\n s - show terminal monitor\r\n e - hide terminal monitor\r\n rlon - turns red led on\r\n rloff - turns led red off\r\n blon - turns blue led on\r\n bloff - turns blue led off\r\n olon - turns orange led on\r\n oloff - turns orange led off\r\n");
@@ -267,11 +264,6 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 				data_buffer[4]=0;
 			}
 
-
-
-
-
-
 			else
 			{
 			size = sprintf(receive_data, "%s",Received);
@@ -279,21 +271,8 @@ HAL_UART_Receive_IT(&huart2, &Received, 1);
 			data_buffer[i]=receive_data[0];
 			i++;
 
-			//3, 7 ,9
-			/*
-			while(data_buffer[i] == 8)
-			{
-			i=i-1;
-			}
-			*/
 			for(int j=0;j<i;j++)
 			{
-				/*
-				if(i==10)
-				{
-				i=0;
-				}
-				*/
 				if(data_buffer[j]==0x7f)
 				{
 				i=j-1;

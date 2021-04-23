@@ -1,6 +1,6 @@
 # SKMwMSW
-This repo is made for course Standardy Komunikacji Międzyukładowej
+This repository is made for course Standardy Komunikacji Międzyukładowej
 
 # Laboratory 1 - UART  
-Basic UART Communication 
+Basic UART Communication using command line interface and monitor.
 
